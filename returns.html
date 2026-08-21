@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Returns — Emotion Rides</title>
+  <meta name="description" content="14-day returns on unused Emotion Rides pieces with tags on. Email sbackemoto@gmail.com. Buyer pays return shipping unless we shipped the wrong item.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Returns — Emotion Rides">
+  <meta property="og:description" content="14-day returns on unused Emotion Rides pieces with tags on. Email sbackemoto@gmail.com. Buyer pays return shipping unless we shipped the wrong item.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo-emotion.png">
+  <link rel="icon" href="logo-emotion.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo-emotion.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-logo" href="index.html">
+        <img src="logo-emotion.png" width="72" height="72" alt="Emotion Rides">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul id="nav-menu" class="nav-links">
+        <li><a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a></li>
+        <li><a href="index.html#watch">Watch</a></li>
+        <li><a href="index.html#movement">Movement</a></li>
+        <li><a href="size-chart.html">Size</a></li>
+        <li><a class="nav-cta" href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop the drop</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="section-index">Policies</p>
+        <h1>Returns</h1>
+        <p class="page-lead">14 days from delivery. Unused, tags on, same condition it left in. Email first — there is no public warehouse address.</p>
+      </div>
+    </header>
+
+    <section class="section page-body">
+      <div class="wrap">
+        <div class="legal">
+          <h2>The window</h2>
+          <p>You have 14 days from the day it arrives. After that, it’s yours.</p>
+
+          <h2>Condition</h2>
+          <p>Unused. Tags on. No wash, no ride dirt, no scent. If it looks worn, I can’t take it back.</p>
+
+          <h2>How to start one</h2>
+          <p>Email <a href="mailto:sbackemoto@gmail.com">sbackemoto@gmail.com</a> with:</p>
+          <ul>
+            <li>Order number or the email you checked out with</li>
+            <li>What you ordered and the size</li>
+            <li>Why it’s coming back</li>
+          </ul>
+          <p>I’ll reply with where to send it. Don’t ship anything until I write back. Grand Junction, CO is the area — I don’t publish a street address.</p>
+
+          <h2>Who pays return shipping</h2>
+          <p>You do, unless I sent the wrong size or the wrong item. Then I cover the return.</p>
+
+          <h2>Refunds</h2>
+          <p>Once the piece is back and checks out, I refund the item. Original outbound shipping is not refunded unless the mistake was mine.</p>
+          <p class="legal-updated">Last updated August 2026</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-emotion.png" width="88" height="88" alt="Emotion Rides">
+        <p>Urban streetwear born from the electric motorcycle generation.</p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a>
+        <a href="index.html#watch">Watch</a>
+        <a href="index.html#movement">Movement</a>
+        <a href="size-chart.html">Size chart</a>
+        <a href="mailto:sbackemoto@gmail.com">Contact</a>
+      </div>
+      <div>
+        <h2>Watch</h2>
+        <a href="https://www.youtube.com/@SBackEMoto" rel="noopener noreferrer" target="_blank">YouTube</a>
+        <a href="https://www.youtube.com/@SBackEMoto?sub_confirmation=1" rel="noopener noreferrer" target="_blank">Subscribe</a>
+      </div>
+      <div>
+        <h2>Policies</h2>
+        <a href="shipping.html">Shipping</a>
+        <a href="returns.html" aria-current="page">Returns</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>© 2026 Emotion Rides. All rights reserved.</p>
+      <p>sbackemoto@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector(".nav-toggle");
+      var menu = document.getElementById("nav-menu");
+      if (!toggle || !menu) return;
+
+      function setOpen(open) {
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        menu.classList.toggle("is-open", open);
+        document.body.classList.toggle("nav-open", open);
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(toggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () { setOpen(false); });
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") setOpen(false);
+      });
+    })();
+  </script>
+</body>
+</html>

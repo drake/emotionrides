@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping — Emotion Rides</title>
+  <meta name="description" content="How Emotion Rides ships U.S. orders. Tracking emailed when the package is on the way. International: email first.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Shipping — Emotion Rides">
+  <meta property="og:description" content="How Emotion Rides ships U.S. orders. Tracking emailed when the package is on the way. International: email first.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo-emotion.png">
+  <link rel="icon" href="logo-emotion.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo-emotion.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-logo" href="index.html">
+        <img src="logo-emotion.png" width="72" height="72" alt="Emotion Rides">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul id="nav-menu" class="nav-links">
+        <li><a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a></li>
+        <li><a href="index.html#watch">Watch</a></li>
+        <li><a href="index.html#movement">Movement</a></li>
+        <li><a href="size-chart.html">Size</a></li>
+        <li><a class="nav-cta" href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop the drop</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="section-index">Policies</p>
+        <h1>Shipping</h1>
+        <p class="page-lead">U.S. orders. Tracking emailed when it leaves. I don’t quote 1–3 day ship times — this is a small shop, not a warehouse.</p>
+      </div>
+    </header>
+
+    <section class="section page-body">
+      <div class="wrap">
+        <div class="legal">
+          <h2>United States</h2>
+          <p>Orders ship after the drop is live and payment clears. I pack from Grand Junction, CO. When the package is on the way, you get a tracking email at the address on the order.</p>
+          <ul>
+            <li>No pre-drop shipping. If you check out before a drop goes live, it waits until it does.</li>
+            <li>Shipping cost shows at checkout on <a href="https://shop.emotionrides.com/" rel="noopener noreferrer">the shop</a>.</li>
+            <li>I will not promise a 1–3 day ship window. You’ll know it’s moving when the tracking email hits.</li>
+          </ul>
+
+          <h2>International</h2>
+          <p>Email <a href="mailto:sbackemoto@gmail.com">sbackemoto@gmail.com</a> before you order. I’ll tell you if I can ship to you and what that looks like. Don’t check out from outside the U.S. and hope.</p>
+
+          <h2>Questions</h2>
+          <p>Order number + what you bought: <a href="mailto:sbackemoto@gmail.com">sbackemoto@gmail.com</a>.</p>
+          <p class="legal-updated">Last updated August 2026</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-emotion.png" width="88" height="88" alt="Emotion Rides">
+        <p>Urban streetwear born from the electric motorcycle generation.</p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a>
+        <a href="index.html#watch">Watch</a>
+        <a href="index.html#movement">Movement</a>
+        <a href="size-chart.html">Size chart</a>
+        <a href="mailto:sbackemoto@gmail.com">Contact</a>
+      </div>
+      <div>
+        <h2>Watch</h2>
+        <a href="https://www.youtube.com/@SBackEMoto" rel="noopener noreferrer" target="_blank">YouTube</a>
+        <a href="https://www.youtube.com/@SBackEMoto?sub_confirmation=1" rel="noopener noreferrer" target="_blank">Subscribe</a>
+      </div>
+      <div>
+        <h2>Policies</h2>
+        <a href="shipping.html" aria-current="page">Shipping</a>
+        <a href="returns.html">Returns</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>© 2026 Emotion Rides. All rights reserved.</p>
+      <p>sbackemoto@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector(".nav-toggle");
+      var menu = document.getElementById("nav-menu");
+      if (!toggle || !menu) return;
+
+      function setOpen(open) {
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        menu.classList.toggle("is-open", open);
+        document.body.classList.toggle("nav-open", open);
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(toggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () { setOpen(false); });
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") setOpen(false);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms — Emotion Rides</title>
+  <meta name="description" content="Terms for the Emotion Rides shop. Small U.S. shop. Colorado law. Contact sbackemoto@gmail.com.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Terms — Emotion Rides">
+  <meta property="og:description" content="Terms for the Emotion Rides shop. Small U.S. shop. Colorado law. Contact sbackemoto@gmail.com.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="logo-emotion.png">
+  <link rel="icon" href="logo-emotion.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo-emotion.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-logo" href="index.html">
+        <img src="logo-emotion.png" width="72" height="72" alt="Emotion Rides">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul id="nav-menu" class="nav-links">
+        <li><a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a></li>
+        <li><a href="index.html#watch">Watch</a></li>
+        <li><a href="index.html#movement">Movement</a></li>
+        <li><a href="size-chart.html">Size</a></li>
+        <li><a class="nav-cta" href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop the drop</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="section-index">Policies</p>
+        <h1>Terms</h1>
+        <p class="page-lead">Buying from Emotion Rides means you’re buying from a small U.S. shop. Colorado law applies.</p>
+      </div>
+    </header>
+
+    <section class="section page-body">
+      <div class="wrap">
+        <div class="legal">
+          <h2>The shop</h2>
+          <p>Emotion Rides is electric motorcycle streetwear. The storefront is <a href="https://shop.emotionrides.com/" rel="noopener noreferrer">shop.emotionrides.com</a>. Products, prices, and what’s in stock can change. Drops go live when they go live. Product photos land with the drop.</p>
+
+          <h2>Orders</h2>
+          <p>Payment is collected at checkout through Big Cartel and Stripe. I pack after payment clears and the drop is live. See <a href="shipping.html">Shipping</a> and <a href="returns.html">Returns</a>.</p>
+
+          <h2>Use</h2>
+          <p>Wear it. Ride in it. Don’t copy the mark, don’t resell my photos, and don’t act like you are Emotion Rides.</p>
+
+          <h2>Liability</h2>
+          <p>Clothes are clothes. Ride at your own risk. Emotion Rides isn’t liable for how you ride, or for anything beyond the garment you bought, to the extent Colorado law allows.</p>
+
+          <h2>Law</h2>
+          <p>These terms are governed by the laws of the State of Colorado, United States. If something here needs a court, that’s where it lives.</p>
+
+          <h2>Contact</h2>
+          <p><a href="mailto:sbackemoto@gmail.com">sbackemoto@gmail.com</a> — Grand Junction, CO.</p>
+          <p class="legal-updated">Last updated August 2026</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-emotion.png" width="88" height="88" alt="Emotion Rides">
+        <p>Urban streetwear born from the electric motorcycle generation.</p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a>
+        <a href="index.html#watch">Watch</a>
+        <a href="index.html#movement">Movement</a>
+        <a href="size-chart.html">Size chart</a>
+        <a href="mailto:sbackemoto@gmail.com">Contact</a>
+      </div>
+      <div>
+        <h2>Watch</h2>
+        <a href="https://www.youtube.com/@SBackEMoto" rel="noopener noreferrer" target="_blank">YouTube</a>
+        <a href="https://www.youtube.com/@SBackEMoto?sub_confirmation=1" rel="noopener noreferrer" target="_blank">Subscribe</a>
+      </div>
+      <div>
+        <h2>Policies</h2>
+        <a href="shipping.html">Shipping</a>
+        <a href="returns.html">Returns</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html" aria-current="page">Terms</a>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>© 2026 Emotion Rides. All rights reserved.</p>
+      <p>sbackemoto@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector(".nav-toggle");
+      var menu = document.getElementById("nav-menu");
+      if (!toggle || !menu) return;
+
+      function setOpen(open) {
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        menu.classList.toggle("is-open", open);
+        document.body.classList.toggle("nav-open", open);
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(toggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () { setOpen(false); });
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") setOpen(false);
+      });
+    })();
+  </script>
+</body>
+</html>
