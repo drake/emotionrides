@@ -467,6 +467,8 @@ ul { list-style: none; }
 .tile-2 { background-image: url("ride-talaria.jpg"); }
 .tile-3 { background-image: url("ride-wheelie.jpg"); }
 .tile-4 { background-image: url("ride-stark.jpg"); }
+.tile-5 { background-image: url("hero-ride.jpg"); }
+.tile-6 { background-image: url("ride-talaria.jpg"); }
 
 .tile-stamp {
   position: absolute;
