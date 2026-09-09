@@ -2,3 +2,7 @@
 shot-*.png
 .wrangler
 node_modules
+
+resend-api-key.txt
+*.pem
+.env

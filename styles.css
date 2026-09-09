@@ -74,7 +74,20 @@ ul { list-style: none; }
 }
 .skip:focus { top: 1rem; }
 
+.announce {
+  background: #000;
+  color: #f4f1ea;
+  text-align: center;
+  font-family: var(--font-display);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
 /* ========== NAV ========== */
+
 .site-header {
   position: sticky;
   top: 0;
@@ -189,8 +202,8 @@ ul { list-style: none; }
   z-index: 0;
   background:
     #0a0a0a
-    url("hero-ride.jpg")
-    center 64% / cover no-repeat;
+    url("ride-wheelie.jpg")
+    center 42% / cover no-repeat;
 }
 
 .hero-media::after {
@@ -198,8 +211,8 @@ ul { list-style: none; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, #0a0a0a 0%, rgba(10,10,10,0.88) 14%, rgba(10,10,10,0.58) 36%, rgba(10,10,10,0.55) 52%, rgba(10,10,10,0.94) 80%, #0a0a0a 100%),
-    linear-gradient(90deg, rgba(10,10,10,0.68) 0%, rgba(10,10,10,0.32) 48%, rgba(10,10,10,0.6) 100%);
+    linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.28) 28%, rgba(10,10,10,0.35) 52%, rgba(10,10,10,0.88) 82%, #0a0a0a 100%),
+    linear-gradient(90deg, rgba(10,10,10,0.38) 0%, rgba(10,10,10,0.12) 48%, rgba(10,10,10,0.4) 100%);
 }
 
 .hero-texture {
@@ -871,6 +884,20 @@ ul { list-style: none; }
   text-transform: uppercase;
 }
 
+.drop-capture-perks {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+  color: var(--muted, #8a8680);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+.drop-capture-perks li::before {
+  content: "▸ ";
+  color: var(--cyan, #5ef0ff);
+}
 .drop-capture-copy {
   color: var(--muted);
   margin-top: 0.85rem;
@@ -918,6 +945,17 @@ ul { list-style: none; }
   margin-top: 0.15rem;
   font-size: 0.78rem;
   color: var(--muted);
+}
+
+.drop-form-note.is-ok { color: var(--cyan); }
+.drop-form-note.is-err { color: #ff6b6b; }
+.drop-form.is-done .btn { opacity: 0.7; pointer-events: none; }
+.drop-form .hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
 }
 
 /* ========== INNER PAGES ========== */
