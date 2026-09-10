@@ -287,6 +287,10 @@
           <li>Occasional list-only codes</li>
           <li>Never sold. Ever.</li>
         </ul>
+        <p class="drop-list-count" id="drop-list-count" hidden>
+          <span class="drop-list-count-num" id="drop-list-count-num">—</span>
+          <span class="drop-list-count-label">on the drop list</span>
+        </p>
       </div>
       <form class="drop-form" id="drop-form" action="/api/subscribe" method="post" novalidate>
         <label class="sr-only" for="drop-email">Email</label>
@@ -404,11 +408,31 @@
           setStatus("You’re on the list. Watch for the drop.", "is-ok");
           form.classList.add("is-done");
           input.value = "";
+          if (!data.already && window.__erBumpDropCount) window.__erBumpDropCount();
         } catch (err) {
           setStatus(err.message || "Couldn’t join. Try again.", "is-err");
           btn.disabled = false;
         }
       });
+    })();
+
+    (function () {
+      var wrap = document.getElementById("drop-list-count");
+      var num = document.getElementById("drop-list-count-num");
+      if (!wrap || !num) return;
+      function show(n) {
+        if (typeof n !== "number" || n < 0 || !isFinite(n)) return;
+        num.textContent = n.toLocaleString("en-US");
+        wrap.hidden = false;
+      }
+      window.__erBumpDropCount = function () {
+        var cur = parseInt(String(num.textContent).replace(/,/g, ""), 10);
+        if (isFinite(cur)) show(cur + 1);
+      };
+      fetch("/api/list-count", { headers: { Accept: "application/json" } })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && typeof d.count === "number") show(d.count); })
+        .catch(function () {});
     })();
   </script>
 </body>

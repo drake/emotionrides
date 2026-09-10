@@ -13,6 +13,8 @@
 const ALLOWED = new Set([
   "https://emotionrides.com",
   "https://www.emotionrides.com",
+  "https://shop.emotionrides.com",
+  "https://emotionrides.bigcartel.com",
 ]);
 
 function corsHeaders(request) {
@@ -211,5 +213,5 @@ export async function onRequestPost(context) {
     text: ownerText({ email, when, isNew, referer, ip }),
   });
 
-  return json(request, 200, { ok: true });
+  return json(request, 200, { ok: true, already: !isNew });
 }
