@@ -44,6 +44,20 @@ body {
 
 body.nav-open { overflow: hidden; }
 
+/* Full-site Emotion metal wordmark backdrop */
+.emotion-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 75% 50% at 50% 12%, rgba(198, 161, 91, 0.1), transparent 58%),
+    linear-gradient(180deg, rgba(5,5,5,0.35) 0%, rgba(5,5,5,0.72) 42%, rgba(5,5,5,0.92) 100%),
+    url("emotion-metal-wordmark.png") center 18% / min(1280px, 155vw) no-repeat,
+    #050505;
+}
+
+
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 button { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; }
@@ -92,7 +106,9 @@ ul { list-style: none; }
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(10, 10, 10, 0.96);
+  background: rgba(5, 5, 5, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -201,18 +217,18 @@ ul { list-style: none; }
   inset: 0;
   z-index: 0;
   background:
-    #0a0a0a
-    url("ride-wheelie.jpg")
-    center 42% / cover no-repeat;
+    radial-gradient(ellipse 70% 55% at 50% 40%, rgba(198,161,91,0.12), transparent 65%),
+    url("emotion-metal-wordmark.png") center 38% / min(1100px, 130vw) no-repeat,
+    #050505;
+  opacity: 0.72;
 }
-
 .hero-media::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.28) 28%, rgba(10,10,10,0.35) 52%, rgba(10,10,10,0.88) 82%, #0a0a0a 100%),
-    linear-gradient(90deg, rgba(10,10,10,0.38) 0%, rgba(10,10,10,0.12) 48%, rgba(10,10,10,0.4) 100%);
+    linear-gradient(180deg, rgba(5,5,5,0.5) 0%, rgba(5,5,5,0.15) 35%, rgba(5,5,5,0.55) 70%, #050505 100%),
+    linear-gradient(90deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.1) 50%, rgba(5,5,5,0.55) 100%);
 }
 
 .hero-texture {
