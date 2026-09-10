@@ -1235,3 +1235,10 @@ table.size-table {
   letter-spacing: 0.18em;
   color: var(--muted, #8a8680);
 }
+
+.tile-jorts {
+  background-image: url("product-jorts-front.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: #f4f1ea !important;
+}
