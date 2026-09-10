@@ -1236,3 +1236,26 @@ table.size-table {
   color: var(--muted, #8a8680);
 }
 
+
+
+/* Cooler metal product tiles */
+.tile-bg {
+  background-color: #080808 !important;
+  background-image:
+    linear-gradient(160deg, rgba(198,161,91,0.18), transparent 45%, rgba(0,0,0,0.55)),
+    url("emotion-metal-wordmark.png") !important;
+  background-size: auto, min(420px, 90%) auto !important;
+  background-position: center, center 42% !important;
+  background-repeat: no-repeat !important;
+}
+.tile-1, .tile-2, .tile-3, .tile-4, .tile-5, .tile-6 {
+  background-image: inherit;
+}
+.lookbook .tile {
+  border: 1px solid rgba(198,161,91,0.22);
+  box-shadow: 0 0 40px rgba(198,161,91,0.06);
+}
+.lookbook .tile:hover {
+  border-color: rgba(198,161,91,0.55);
+  box-shadow: 0 0 48px rgba(198,161,91,0.14);
+}
