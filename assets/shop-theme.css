@@ -1,0 +1,511 @@
+/* Emotion Rides — Cosmos restyle 2026 */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap");
+
+
+/* Cooler Emotion metal backgrounds (2026-09-10) */
+body,
+.theme,
+#maintenance,
+#maintenance .theme {
+  background-color: #050505 !important;
+  background-image:
+    linear-gradient(180deg, rgba(5,5,5,0.35) 0%, rgba(5,5,5,0.72) 55%, rgba(5,5,5,0.92) 100%),
+    url("https://emotionrides.com/emotion-bg-new.png") !important;
+  background-size: auto, cover !important;
+  background-position: center, center !important;
+  background-attachment: fixed, fixed !important;
+  background-repeat: no-repeat !important;
+}
+.product-list-item,
+.product-card,
+.product {
+  border: 1px solid rgba(198,161,91,0.18) !important;
+  background: rgba(8,8,8,0.72) !important;
+  backdrop-filter: blur(6px);
+}
+.product-list-item:hover,
+.product-card:hover {
+  border-color: rgba(198,161,91,0.5) !important;
+  box-shadow: 0 0 28px rgba(198,161,91,0.12) !important;
+}
+#maintenance .maintenance-message {
+  background: rgba(5,5,5,0.55) !important;
+  border: 1px solid rgba(198,161,91,0.25);
+  padding: 2rem 1.25rem !important;
+}
+
+/* ------------------------------------------------------------------
+   Tokens — match emotionrides.com
+   Cosmos classes from source: layout.html, home.html, maintenance.html
+   and stylesheets/*.sass (bigcartel-themes/cosmos)
+   ------------------------------------------------------------------ */
+
+:root {
+  --er-bg: #0a0a0a;
+  --er-bg-2: #111111;
+  --er-bg-3: #1a1a1a;
+  --er-text: #ffffff;
+  --er-muted: #a0a0a0;
+  --er-cyan: #c6a15b;
+  --er-lime: #e8d5a3;
+  --er-line: rgba(255, 255, 255, 0.1);
+  --er-display: "Bebas Neue", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --er-body: "Archivo", "Work Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --background-color: #0a0a0a;
+  --text-color: #ffffff;
+  --link-text-color: #ffffff;
+  --link-hover-color: #c6a15b;
+  --shop-name-text-color: #ffffff;
+  --header-text-color: #ffffff;
+  --button-background-color: #c6a15b;
+  --button-hover-background-color: #e8d5a3;
+  --button-text-color: #0a0a0a;
+  --border-color: #2a2a2a;
+  --announcement-background-color: #111111;
+  --announcement-text-color: #ffffff;
+  --welcome-text-color: #ffffff;
+  --welcome-button-background-color: #c6a15b;
+  --welcome-button-text-color: #0a0a0a;
+  --welcome-button-border-color: #c6a15b;
+  --welcome-button-hover-background-color: #ffffff;
+  --welcome-button-hover-text-color: #0a0a0a;
+  --product-hover-text-color: #c6a15b;
+  --border-radius: 0;
+  --border-radius-sm: 0;
+  --primary-font: "Bebas Neue", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --secondary-font: "Archivo", "Work Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--er-body);
+  background: var(--er-bg);
+  color: var(--er-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--er-cyan);
+  color: var(--er-bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--er-cyan);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--er-text);
+}
+
+a:hover,
+a:focus {
+  color: var(--er-cyan);
+}
+
+h1, h2, h3, h4, h5, h6,
+.header-store-link,
+.store-name,
+.page-title,
+.featured-title,
+.product-list-thumb-name,
+.product-name,
+.footer-nav-title {
+  font-family: var(--er-display);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------
+   Announcement
+   ------------------------------------------------------------------ */
+
+.announcement-message {
+  background: var(--er-bg-2);
+  color: var(--er-text);
+  border-bottom: 1px solid var(--er-line);
+  font-family: var(--er-display);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+
+.announcement-message a,
+.announcement-message a:visited {
+  color: var(--er-lime);
+}
+
+.announcement-message a:hover {
+  color: var(--er-cyan);
+}
+
+/* ------------------------------------------------------------------
+   Header / nav
+   ------------------------------------------------------------------ */
+
+header {
+  background: rgba(10, 10, 10, 0.96);
+  border-bottom: 1px solid var(--er-line);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.header-store-link,
+.store-logo,
+.store-name {
+  color: var(--er-text);
+}
+
+.top-nav,
+.top-nav a,
+.top-nav button {
+  font-family: var(--er-display);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--er-text);
+}
+
+.top-nav a:hover,
+.top-nav button:hover,
+.top-nav a:focus,
+.icon-button:hover,
+.icon-button:focus {
+  color: var(--er-cyan);
+}
+
+/* ------------------------------------------------------------------
+   Buttons — marketing site: square, uppercase, tracked
+   Cosmos default is 4px radius, not a pill; square it off anyway.
+   ------------------------------------------------------------------ */
+
+button.button,
+a.button,
+div.button,
+.home-hero-button,
+a.all-products-button,
+.cart-submit .button,
+.product-form button,
+.product-list-shop-now {
+  font-family: var(--er-display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 0 !important;
+  border: 0;
+  line-height: 1;
+  padding: 0.95rem 1.6rem;
+  background: var(--er-cyan);
+  color: var(--er-bg);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+button.button:hover,
+a.button:hover,
+div.button:hover,
+.home-hero-button:hover,
+a.all-products-button:hover,
+.cart-submit .button:hover,
+.product-form button:hover {
+  background: var(--er-lime);
+  color: var(--er-bg);
+  transform: translateY(-1px);
+}
+
+.home-hero-button {
+  background: var(--er-cyan) !important;
+  color: var(--er-bg) !important;
+  border-color: var(--er-cyan) !important;
+}
+
+.home-hero-button:hover {
+  background: #ffffff !important;
+  color: var(--er-bg) !important;
+}
+
+/* ------------------------------------------------------------------
+   Homepage hero + featured video
+   ------------------------------------------------------------------ */
+
+.home-hero,
+.home-hero--full-page,
+.home-hero--constrained {
+  border-radius: 0;
+}
+
+.home-hero-text {
+  font-family: var(--er-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+.home-hero--constrained .home-hero-content,
+.home-hero--constrained .home-hero-overlay,
+.home-hero--constrained .home-hero-image,
+.slideshow-image {
+  border-radius: 0;
+}
+
+.home-featured-products .featured-title,
+h2.featured-title,
+#main h1.featured-title {
+  font-family: var(--er-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------
+   Product grid
+   ------------------------------------------------------------------ */
+
+.product-list-thumb-name,
+.product-list-thumb-info {
+  font-family: var(--er-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-list-thumb-price,
+.price-suffix {
+  color: var(--er-cyan);
+  font-family: var(--er-display);
+  letter-spacing: 0.1em;
+}
+
+.product-list-image,
+.product-list-image-container,
+.product-list-thumb {
+  border-radius: 0;
+}
+
+.product-list-thumb-status {
+  border-radius: 0;
+  font-family: var(--er-display);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------
+   Product page
+   ------------------------------------------------------------------ */
+
+.product-container,
+.product-detail,
+.product-detail__header,
+.product-breadcrumb {
+  color: var(--er-text);
+}
+
+.product-detail__header h1,
+.related-products-header {
+  font-family: var(--er-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.product-detail__description {
+  font-family: var(--er-body);
+  color: var(--er-muted);
+}
+
+.inventory-status-message {
+  color: var(--er-cyan);
+  font-family: var(--er-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.select,
+select,
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+textarea {
+  background: var(--er-bg-2);
+  color: var(--er-text);
+  border: 1px solid #2a2a2a;
+  border-radius: 0;
+}
+
+/* ------------------------------------------------------------------
+   Cart
+   ------------------------------------------------------------------ */
+
+.cart-header h1,
+.cart-empty,
+.cart-subtotal,
+.product-name {
+  font-family: var(--er-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cart-item,
+.cart-items,
+.cart-footer {
+  border-color: var(--er-line);
+}
+
+.cart-item-price,
+.cart-subtotal {
+  color: var(--er-cyan);
+}
+
+.qty-button,
+.cart-remove-item--link,
+.continue-shopping {
+  font-family: var(--er-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.message-banner {
+  background: var(--er-bg-2);
+  color: var(--er-text);
+  border: 1px solid var(--er-line);
+  border-radius: 0;
+}
+
+/* ------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------ */
+
+footer {
+  background: var(--er-bg-2);
+  border-top: 1px solid var(--er-line);
+  color: var(--er-muted);
+}
+
+footer a {
+  color: var(--er-muted);
+}
+
+footer a:hover {
+  color: var(--er-cyan);
+}
+
+.footer-nav-title {
+  color: var(--er-text);
+}
+
+.footer-custom-content {
+  font-family: var(--er-body);
+  color: var(--er-muted);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.social-icons a {
+  color: var(--er-text);
+}
+
+.social-icons a:hover {
+  color: var(--er-cyan);
+}
+
+/* ------------------------------------------------------------------
+   Maintenance — loud drop teaser
+   ------------------------------------------------------------------ */
+
+body.maintenance-page,
+.maintenance-page,
+body.maintenance {
+  background: #0a0a0a !important;
+  color: #fff !important;
+  min-height: 100vh;
+}
+
+.maintenance-content {
+  background: transparent !important;
+  border: 0 !important;
+  max-width: 1100px !important;
+  width: 100% !important;
+  padding: 8vh 1.25rem 4rem !important;
+  text-align: center;
+}
+
+.maintenance-page h1,
+.maintenance-page h1.store-name,
+.maintenance-page .store-name {
+  font-family: "Bebas Neue", "Oswald", Impact, sans-serif !important;
+  font-size: clamp(0.8rem, 2vw, 1.05rem) !important;
+  letter-spacing: 0.32em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  color: #e8d5a3 !important;
+  margin: 0 0 1.5rem !important;
+}
+
+.maintenance-message {
+  font-family: "Archivo", "Work Sans", sans-serif;
+  color: #fff;
+  padding: 0 !important;
+}
+
+.maintenance-message .er-drop,
+.er-drop {
+  font-family: "Bebas Neue", "Oswald", Impact, "Arial Black", sans-serif !important;
+  font-size: clamp(4.2rem, 18vw, 10.5rem) !important;
+  letter-spacing: 0.04em !important;
+  line-height: 0.8 !important;
+  text-transform: uppercase !important;
+  color: #c6a15b !important;
+  margin: 0 !important;
+  text-shadow: 0 0 22px #c6a15b, 0 0 64px rgba(0,255,255,0.45);
+  animation: er-pulse 2.4s ease-in-out infinite;
+}
+
+.maintenance-message .er-soon,
+.er-soon {
+  font-family: "Bebas Neue", "Oswald", Impact, "Arial Black", sans-serif !important;
+  font-size: clamp(3.2rem, 14vw, 8rem) !important;
+  letter-spacing: 0.06em !important;
+  line-height: 0.8 !important;
+  text-transform: uppercase !important;
+  color: #e8d5a3 !important;
+  margin: 0.12em 0 0.45em !important;
+  text-shadow: 0 0 18px #e8d5a3, 0 0 48px rgba(204,255,0,0.35);
+}
+
+.maintenance-message .er-tag,
+.er-tag {
+  font-family: "Bebas Neue", "Oswald", Impact, sans-serif !important;
+  font-size: clamp(1.35rem, 3.6vw, 2.4rem) !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: #fff !important;
+  line-height: 1.05 !important;
+  margin: 0 0 1.25rem !important;
+}
+
+.maintenance-message .er-copy,
+.er-copy {
+  color: #a0a0a0 !important;
+  font-size: 1rem !important;
+  margin: 0 !important;
+}
+
+.maintenance-message a {
+  color: #c6a15b !important;
+  text-decoration: none;
+  border-bottom: 1px solid #c6a15b;
+}
+
+.maintenance-message a:hover {
+  color: #e8d5a3 !important;
+  border-bottom-color: #e8d5a3;
+}
+
+@keyframes er-pulse {
+  0%, 100% { text-shadow: 0 0 18px #c6a15b, 0 0 48px rgba(0,255,255,0.35); transform: none; }
+  50% { text-shadow: 0 0 32px #c6a15b, 0 0 90px rgba(0,255,255,0.55); }
+}
+
