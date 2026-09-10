@@ -44,18 +44,19 @@ body {
 
 body.nav-open { overflow: hidden; }
 
-/* Full-site Emotion metal wordmark backdrop */
+/* New Emotion abstract metal backdrop — no photos */
 .emotion-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 75% 50% at 50% 12%, rgba(198, 161, 91, 0.1), transparent 58%),
-    linear-gradient(180deg, rgba(5,5,5,0.35) 0%, rgba(5,5,5,0.72) 42%, rgba(5,5,5,0.92) 100%),
-    url("emotion-metal-wordmark.png") center 18% / min(1280px, 155vw) no-repeat,
+    linear-gradient(180deg, rgba(5,5,5,0.2) 0%, rgba(5,5,5,0.55) 55%, rgba(5,5,5,0.88) 100%),
+    url("emotion-bg-new.png") center / cover no-repeat,
     #050505;
 }
+
+
 
 
 img { max-width: 100%; display: block; }
@@ -203,6 +204,7 @@ ul { list-style: none; }
 
 /* ========== HERO ========== */
 .hero {
+  background: transparent;
   position: relative;
   min-height: calc(100vh - var(--nav-h));
   min-height: calc(100dvh - var(--nav-h));
@@ -212,24 +214,8 @@ ul { list-style: none; }
   isolation: isolate;
 }
 
-.hero-media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 40%, rgba(198,161,91,0.12), transparent 65%),
-    url("emotion-metal-wordmark.png") center 38% / min(1100px, 130vw) no-repeat,
-    #050505;
-  opacity: 0.72;
-}
-.hero-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(5,5,5,0.5) 0%, rgba(5,5,5,0.15) 35%, rgba(5,5,5,0.55) 70%, #050505 100%),
-    linear-gradient(90deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.1) 50%, rgba(5,5,5,0.55) 100%);
-}
+/* hero-media removed — Emotion mark comes from .emotion-bg */
+.hero-media { display: none !important; }
 
 .hero-texture {
   position: absolute;
@@ -474,6 +460,10 @@ ul { list-style: none; }
 }
 
 .tile-bg {
+  background-size: 85% auto !important;
+  background-repeat: no-repeat !important;
+  background-position: center 40% !important;
+  background-color: #0a0a0a !important;
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -492,12 +482,12 @@ ul { list-style: none; }
   background: linear-gradient(180deg, rgba(10,10,10,0.58) 0%, rgba(10,10,10,0.4) 32%, rgba(10,10,10,0.93) 100%);
 }
 
-.tile-1 { background-image: url("hero-ride.jpg"); }
-.tile-2 { background-image: url("ride-talaria.jpg"); }
-.tile-3 { background-image: url("ride-wheelie.jpg"); }
-.tile-4 { background-image: url("ride-stark.jpg"); }
-.tile-5 { background-image: url("hero-ride.jpg"); }
-.tile-6 { background-image: url("ride-talaria.jpg"); }
+.tile-1 { background-image: url("emotion-metal-wordmark.png"); }
+.tile-2 { background-image: url("emotion-metal-wordmark.png"); }
+.tile-3 { background-image: url("emotion-metal-wordmark.png"); }
+.tile-4 { background-image: url("emotion-metal-wordmark.png"); }
+.tile-5 { background-image: url("emotion-metal-wordmark.png"); }
+.tile-6 { background-image: url("emotion-metal-wordmark.png"); }
 
 .tile-stamp {
   position: absolute;
