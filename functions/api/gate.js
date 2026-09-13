@@ -1,26 +1,12 @@
 /**
- * Emotion Rides site password gate.
- * Set Pages secret: SITE_PASSWORD
- * Exempts /api/list-count so the closed Big Cartel page can still show drop-list count.
+ * Password unlock — sets er_gate cookie and redirects home.
+ * Secret: SITE_PASSWORD
  */
-
-const COOKIE = "er_gate";
 
 async function tokenFor(password) {
   const data = new TextEncoder().encode("emotionrides-gate:" + password);
   const digest = await crypto.subtle.digest("SHA-256", data);
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
-function parseCookie(header) {
-  const out = {};
-  if (!header) return out;
-  for (const part of header.split(";")) {
-    const i = part.indexOf("=");
-    if (i < 0) continue;
-    out[part.slice(0, i).trim()] = part.slice(i + 1).trim();
-  }
-  return out;
 }
 
 function gatePage(wrong) {
@@ -70,7 +56,6 @@ function gatePage(wrong) {
     font-family: "Bebas Neue", Oswald, sans-serif; letter-spacing: .18em;
     text-transform: uppercase; font-size: 1rem; font-weight: 700; cursor: pointer;
   }
-  button:hover { filter: brightness(1.05); }
 </style>
 </head>
 <body>
@@ -85,38 +70,39 @@ function gatePage(wrong) {
 </html>`;
 }
 
-export async function onRequest(context) {
-  const { request, env, next } = context;
-  const url = new URL(request.url);
-  const path = url.pathname;
-
-  // Public: unlock endpoint + live subscriber count for closed Big Cartel page
-  if (
-    path === "/api/list-count" || path.startsWith("/api/list-count/") ||
-    path === "/api/gate" || path.startsWith("/api/gate/")
-  ) {
-    return next();
-  }
-
+export async function onRequestPost(context) {
+  const { request, env } = context;
   const password = (env && env.SITE_PASSWORD) || "";
   if (!password) {
-    return new Response("Site password not configured.", {
-      status: 503,
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    return new Response("Site password not configured.", { status: 503 });
+  }
+
+  let provided = "";
+  try {
+    const form = await request.formData();
+    provided = String(form.get("password") || "");
+  } catch (_) {
+    provided = "";
+  }
+
+  if (provided === password) {
+    const expected = await tokenFor(password);
+    return new Response(null, {
+      status: 303,
+      headers: {
+        Location: "/",
+        "Set-Cookie": `er_gate=${expected}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`,
+        "Cache-Control": "no-store",
+      },
     });
   }
 
-  const expected = await tokenFor(password);
-  const cookies = parseCookie(request.headers.get("Cookie") || "");
-  if (cookies[COOKIE] === expected) {
-    return next();
-  }
-
-  return new Response(gatePage(false), {
+  return new Response(gatePage(true), {
     status: 401,
-    headers: {
-      "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "no-store",
-    },
+    headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },
   });
+}
+
+export async function onRequestGet() {
+  return new Response(null, { status: 303, headers: { Location: "/" } });
 }
