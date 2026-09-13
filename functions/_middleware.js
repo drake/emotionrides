@@ -23,10 +23,11 @@ function parseCookie(header) {
   return out;
 }
 
-function gatePage(wrong) {
+function gatePage(wrong, next) {
   const msg = wrong
     ? `<p class="err">Wrong password.</p>`
     : `<p class="sub">Private drop — enter the password.</p>`;
+  const nextVal = String(next || "https://emotionrides.com/").replace(/"/g, "&quot;");
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -77,6 +78,7 @@ function gatePage(wrong) {
   <form class="card" method="post" action="/api/gate">
     <h1>Emotion Rides</h1>
     ${msg}
+    <input type="hidden" name="next" value="${nextVal}"/>
     <label for="password">Password</label>
     <input id="password" name="password" type="password" autocomplete="current-password" autofocus required/>
     <button type="submit">Enter</button>
@@ -112,7 +114,8 @@ export async function onRequest(context) {
     return next();
   }
 
-  return new Response(gatePage(false), {
+  const nextUrl = url.searchParams.get("next") || ("https://" + url.host + url.pathname + url.search);
+  return new Response(gatePage(false, nextUrl), {
     status: 401,
     headers: {
       "Content-Type": "text/html; charset=utf-8",

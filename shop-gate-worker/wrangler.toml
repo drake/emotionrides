@@ -1,0 +1,9 @@
+name = "emotionrides-shop-gate"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+workers_dev = false
+account_id = "8d6ebf9ad752f6ba3558e8497850ef87"
+
+[[routes]]
+pattern = "shop.emotionrides.com/*"
+zone_name = "emotionrides.com"

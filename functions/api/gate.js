@@ -1,6 +1,7 @@
 /**
- * Password unlock — sets er_gate cookie and redirects home.
+ * Password unlock — sets er_gate cookie (shared on *.emotionrides.com) and redirects.
  * Secret: SITE_PASSWORD
+ * Optional form field or query: next=https://shop.emotionrides.com/
  */
 
 async function tokenFor(password) {
@@ -9,10 +10,25 @@ async function tokenFor(password) {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-function gatePage(wrong) {
+function safeNext(raw) {
+  try {
+    const n = new URL(String(raw || ""), "https://emotionrides.com");
+    if (
+      n.hostname === "emotionrides.com" ||
+      n.hostname === "www.emotionrides.com" ||
+      n.hostname === "shop.emotionrides.com"
+    ) {
+      return n.href;
+    }
+  } catch (_) {}
+  return "https://emotionrides.com/";
+}
+
+function gatePage(wrong, next) {
   const msg = wrong
     ? `<p class="err">Wrong password.</p>`
     : `<p class="sub">Private drop — enter the password.</p>`;
+  const nextVal = String(next || "https://emotionrides.com/").replace(/"/g, "&quot;");
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -29,7 +45,7 @@ function gatePage(wrong) {
     background: #050505; color: #e8e4dc;
     background-image:
       linear-gradient(180deg, rgba(5,5,5,.45), rgba(5,5,5,.92)),
-      url("/emotion-bg-new.png");
+      url("https://emotionrides.com/emotion-bg-new.png");
     background-size: cover; background-position: center;
   }
   .card {
@@ -49,7 +65,6 @@ function gatePage(wrong) {
     width: 100%; padding: .85rem .9rem; border: 1px solid rgba(198,161,91,.35);
     background: #0a0a0a; color: #f4f1ea; font-size: 1rem; outline: none;
   }
-  input[type=password]:focus { border-color: #c6a15b; }
   button {
     margin-top: .9rem; width: 100%; padding: .9rem;
     border: 0; background: #c6a15b; color: #0a0a0a;
@@ -62,6 +77,7 @@ function gatePage(wrong) {
   <form class="card" method="post" action="/api/gate">
     <h1>Emotion Rides</h1>
     ${msg}
+    <input type="hidden" name="next" value="${nextVal}"/>
     <label for="password">Password</label>
     <input id="password" name="password" type="password" autocomplete="current-password" autofocus required/>
     <button type="submit">Enter</button>
@@ -78,9 +94,11 @@ export async function onRequestPost(context) {
   }
 
   let provided = "";
+  let next = "https://emotionrides.com/";
   try {
     const form = await request.formData();
     provided = String(form.get("password") || "");
+    next = safeNext(form.get("next"));
   } catch (_) {
     provided = "";
   }
@@ -90,19 +108,21 @@ export async function onRequestPost(context) {
     return new Response(null, {
       status: 303,
       headers: {
-        Location: "/",
-        "Set-Cookie": `er_gate=${expected}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`,
+        Location: next,
+        "Set-Cookie": `er_gate=${expected}; Path=/; Domain=.emotionrides.com; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`,
         "Cache-Control": "no-store",
       },
     });
   }
 
-  return new Response(gatePage(true), {
+  return new Response(gatePage(true, next), {
     status: 401,
     headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },
   });
 }
 
-export async function onRequestGet() {
-  return new Response(null, { status: 303, headers: { Location: "/" } });
+export async function onRequestGet(context) {
+  const url = new URL(context.request.url);
+  const next = safeNext(url.searchParams.get("next"));
+  return new Response(null, { status: 303, headers: { Location: "/?next=" + encodeURIComponent(next) } });
 }
