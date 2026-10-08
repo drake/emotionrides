@@ -5,6 +5,7 @@
  */
 
 export const PRODUCTS = ["Hoodie", "Tee", "Jeans", "Jorts"];
+export const COMFORT = ["Super comfy", "Comfy", "Okay", "Not really"];
 export const TEXT_MIN = 4;
 export const TEXT_MAX = 600;
 export const NAME_MAX = 40;
@@ -61,6 +62,11 @@ function cleanBody(raw) {
     .trim();
 }
 
+function canonicalComfort(raw) {
+  const value = String(raw ?? "").trim().toLowerCase();
+  return COMFORT.find((item) => item.toLowerCase() === value) || "";
+}
+
 export function parseReview(input) {
   if (!input || typeof input !== "object" || Array.isArray(input)) {
     return { ok: false, error: "Bad request." };
@@ -95,9 +101,12 @@ export function parseReview(input) {
     product = match;
   }
 
+  const comfort = canonicalComfort(input.comfort);
+  if (!comfort) return { ok: false, error: "Say if it’s comfortable." };
+
   const text = cleanBody(input.text);
   if (text.length < TEXT_MIN || text.length > TEXT_MAX) {
-    return { ok: false, error: "Write a few words (4–600 characters)." };
+    return { ok: false, error: "Say what you like about it (4–600 characters)." };
   }
   const links = text.match(/https?:\/\/|www\./gi);
   if (links && links.length > 2) {
@@ -111,7 +120,7 @@ export function parseReview(input) {
 
   return {
     ok: true,
-    value: { rating, name, product, text, email },
+    value: { rating, name, product, comfort, text, email },
   };
 }
 
@@ -154,12 +163,15 @@ export function toPublic(record) {
   const text = cleanBody(record.text);
   if (!text || text.length > TEXT_MAX) return null;
   const product = PRODUCTS.includes(record.product) ? record.product : "";
+  const comfort = canonicalComfort(record.comfort);
+  if (!comfort) return null;
   const createdAt = typeof record.createdAt === "string" ? record.createdAt : "";
   if (!createdAt) return null;
   return {
     name,
     rating,
     product,
+    comfort,
     text,
     createdAt,
     dateLabel: formatDate(createdAt),
@@ -296,6 +308,9 @@ export function moderationPage({ mode, review, token, action }) {
     ? `<div class="card">
         <p class="stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</p>
         <p class="who">${escapeHtml(review.name)}${review.product ? ` · ${escapeHtml(review.product)}` : ""}</p>
+        <p class="q">Is it comfortable?</p>
+        <p class="comfort">${escapeHtml(review.comfort || "")}</p>
+        <p class="q">What do you like about it?</p>
         <p class="text">${escapeWithBreaks(review.text)}</p>
         <p class="date">${escapeHtml(review.dateLabel || "")}</p>
       </div>`
@@ -343,7 +358,9 @@ export function moderationPage({ mode, review, token, action }) {
   }
   .stars { margin: 0 0 .35rem; color: #5ef0ff; letter-spacing: .12em; font-size: 1.15rem; }
   .who { margin: 0; font-family: "Bebas Neue", Impact, sans-serif; letter-spacing: .08em; text-transform: uppercase; font-size: 1.35rem; }
-  .text { margin: .55rem 0 0; color: #f4f1ea; line-height: 1.45; overflow-wrap: anywhere; }
+  .q { margin: .75rem 0 0; color: #c6a15b; font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .comfort { margin: .2rem 0 0; color: #f4f1ea; line-height: 1.4; }
+  .text { margin: .2rem 0 0; color: #f4f1ea; line-height: 1.45; overflow-wrap: anywhere; }
   .date { margin: .7rem 0 0; color: #9a9488; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
   button, .back a {
     display: block; width: 100%; text-align: center; text-decoration: none;
@@ -387,7 +404,10 @@ export function ownerEmail({ review, approveUrl, deleteUrl, when }) {
     <tr><td style="padding:6px 0;color:#8a8680">When</td><td style="padding:6px 0">${escapeHtml(when)}</td></tr>
     ${emailRow}
   </table>
-  <p style="font-size:15px;line-height:1.5;margin:16px 0;white-space:pre-wrap">${escapeWithBreaks(review.text)}</p>
+  <p style="margin:16px 0 4px;color:#c6a15b;font-size:11px;letter-spacing:.16em;text-transform:uppercase">Is it comfortable?</p>
+  <p style="margin:0 0 12px;font-size:15px;line-height:1.45">${escapeHtml(review.comfort || "")}</p>
+  <p style="margin:0 0 4px;color:#c6a15b;font-size:11px;letter-spacing:.16em;text-transform:uppercase">What do you like about it?</p>
+  <p style="font-size:15px;line-height:1.5;margin:0 0 16px;white-space:pre-wrap">${escapeWithBreaks(review.text)}</p>
   <p style="margin:0 0 14px;color:#8a8680;font-size:13px;line-height:1.45">Each link opens a confirm page, so a mail app can’t approve or delete it by prefetching the URL. Email is never shown on the site.</p>
   <table role="presentation" width="100%" style="border-collapse:collapse">
     <tr><td style="padding:0 0 10px">
@@ -404,6 +424,10 @@ ${review.rating}/5  ${review.name}${review.product ? " · " + review.product : "
 When: ${when}
 Email: ${review.email || "Not given"}
 
+Is it comfortable?
+${review.comfort || ""}
+
+What do you like about it?
 ${review.text}
 
 Approve (opens a confirm page):

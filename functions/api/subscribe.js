@@ -6,7 +6,7 @@
  *   RESEND_API_KEY
  * Optional:
  *   RESEND_FROM=Emotion Rides <drops@updates.emotionrides.com>
- *   RESEND_OWNER=sbackemoto@gmail.com
+ *   RESEND_OWNER=emotioncosupport@gmail.com
  *   RESEND_AUDIENCE_ID
  */
 
@@ -84,7 +84,7 @@ function welcomeHtml() {
     &nbsp;·&nbsp;
     <a href="https://emotionrides.com" style="color:#c6a15b">emotionrides.com</a>
   </p>
-  <p style="color:#8a8680;font-size:12px;margin:28px 0 0;line-height:1.5">Unsubscribe anytime by replying or emailing sbackemoto@gmail.com. We don’t sell your email. Ever.</p>
+  <p style="color:#8a8680;font-size:12px;margin:28px 0 0;line-height:1.5">Unsubscribe anytime by replying or emailing emotioncosupport@gmail.com. We don’t sell your email. Ever.</p>
 </div>`;
 }
 
@@ -154,7 +154,7 @@ export async function onRequestPost(context) {
 
   const from =
     env.RESEND_FROM || "Emotion Rides <drops@updates.emotionrides.com>";
-  const owner = env.RESEND_OWNER || "sbackemoto@gmail.com";
+  const owner = env.RESEND_OWNER || "emotioncosupport@gmail.com";
 
   let payload;
   try {

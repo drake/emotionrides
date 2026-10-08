@@ -70,7 +70,8 @@ const good = {
   rating: 5,
   name: "Riley",
   product: "Hoodie",
-  text: "Heavy fleece, fits the night rides.",
+  comfort: "Super comfy",
+  text: "Heavy fleece, the fit, the wash.",
   email: "Riley.Rider@Example.com",
 };
 
@@ -89,18 +90,21 @@ afterEach(() => {
 });
 
 describe("parse and escape", () => {
-  test("accepts a normal review and canonicalizes product and email", () => {
-    const parsed = parseReview({ ...good, product: "hoodie" });
+  test("accepts a normal review and canonicalizes product, comfort, and email", () => {
+    const parsed = parseReview({ ...good, product: "hoodie", comfort: "super comfy" });
     assert.equal(parsed.ok, true);
     assert.equal(parsed.value.product, "Hoodie");
+    assert.equal(parsed.value.comfort, "Super comfy");
     assert.equal(parsed.value.email, "riley.rider@example.com");
   });
 
-  test("rejects bad ratings, emails-as-names, and long link spam", () => {
+  test("rejects bad ratings, emails-as-names, bad comfort, and long link spam", () => {
     assert.equal(parseReview({ ...good, rating: 0 }).ok, false);
     assert.equal(parseReview({ ...good, rating: true }).ok, false);
     assert.equal(parseReview({ ...good, name: "a@b.com" }).ok, false);
-    assert.match(parseReview({ ...good, text: "a" }).error, /few words/);
+    assert.match(parseReview({ ...good, text: "a" }).error, /what you like/);
+    assert.match(parseReview({ ...good, comfort: "" }).error, /comfortable/);
+    assert.equal(parseReview({ ...good, comfort: "itchy" }).ok, false);
     assert.equal(parseReview({ ...good, product: "Hat" }).ok, false);
     const spam = parseReview({
       ...good,
@@ -119,17 +123,20 @@ describe("parse and escape", () => {
     assert.match(escapeHtml(XSS), /&lt;script&gt;/);
   });
 
-  test("public view drops email", () => {
+  test("public view drops email and keeps both clothing answers", () => {
     const pub = toPublic({
       name: "Riley",
       rating: 5,
       product: "Tee",
-      text: "Solid.",
+      comfort: "Comfy",
+      text: "The wash holds up.",
       email: "secret@example.com",
       createdAt: "2026-10-08T12:00:00.000Z",
     });
     assert.equal(pub.email, undefined);
+    assert.equal(pub.comfort, "Comfy");
     assert.equal(JSON.stringify(pub).includes("secret@example.com"), false);
+    assert.equal(toPublic({ ...pub, comfort: "rides great" }), null);
   });
 });
 
@@ -186,6 +193,13 @@ describe("HTTP", () => {
     assert.match(emails[0].body.html, /&lt;script&gt;/);
     assert.match(emails[0].body.html, /riley\.rider@example\.com/);
     assert.match(emails[0].body.reply_to, /riley\.rider@example\.com/);
+    assert.match(emails[0].body.html, /Is it comfortable/);
+    assert.match(emails[0].body.html, /Super comfy/);
+    assert.match(emails[0].body.html, /What do you like about it/);
+    assert.match(emails[0].body.text, /Is it comfortable\?\nSuper comfy/);
+    assert.match(emails[0].body.text, /What do you like about it\?/);
+    assert.doesNotMatch(emails[0].body.html, /how does it ride/i);
+    assert.doesNotMatch(emails[0].body.text, /how does it ride/i);
 
     const listed = await onRequestGet({
       request: new Request("https://emotionrides.com/api/reviews"),
@@ -200,6 +214,7 @@ describe("HTTP", () => {
     assert.equal(stored.length, 1);
     const saved = JSON.parse(kv.store.get(stored[0]).value);
     assert.equal(saved.status, "pending");
+    assert.equal(saved.comfort, "Super comfy");
     assert.equal(saved.email, "riley.rider@example.com");
 
     const approveUrl = emails[0].body.text.split("Approve (opens a confirm page):\n")[1].split("\n")[0];
@@ -214,6 +229,8 @@ describe("HTTP", () => {
     assert.match(confirmHtml, /&lt;script&gt;/);
     assert.equal(confirmHtml.includes("example.com"), false);
     assert.match(confirmHtml, /Approve/);
+    assert.match(confirmHtml, /Is it comfortable/);
+    assert.match(confirmHtml, /What do you like about it/);
 
     const approved = await moderatePost({
       request: new Request("https://emotionrides.com/api/review-moderate", {
@@ -234,6 +251,7 @@ describe("HTTP", () => {
     assert.equal(after.average, 5);
     assert.equal(after.reviews[0].name, "Riley");
     assert.equal(after.reviews[0].product, "Hoodie");
+    assert.equal(after.reviews[0].comfort, "Super comfy");
     assert.equal(after.reviews[0].email, undefined);
     assert.equal(JSON.stringify(after).includes("example.com"), false);
     assert.match(after.reviews[0].text, /script/);
@@ -282,13 +300,13 @@ describe("HTTP", () => {
 
     for (let i = 0; i < 5; i++) {
       const res = await onRequestPost({
-        request: postReview({ ...good, email: "", text: "Ride " + i + " was solid." }, "198.51.100.4"),
+        request: postReview({ ...good, email: "", text: "Fleece " + i + " feels solid." }, "198.51.100.4"),
         env,
       });
       assert.equal(res.status, 200);
     }
     const blocked = await onRequestPost({
-      request: postReview({ ...good, email: "", text: "One more ride note." }, "198.51.100.4"),
+      request: postReview({ ...good, email: "", text: "One more note on the wash." }, "198.51.100.4"),
       env,
     });
     assert.equal(blocked.status, 429);
@@ -317,28 +335,24 @@ describe("HTTP", () => {
   });
 });
 
-describe("password gate", () => {
-  test("review routes skip the gate and the homepage does not", async () => {
-    const env = { SITE_PASSWORD: "secret-pass" };
-    for (const path of ["/api/reviews", "/api/review-moderate?token=abc"]) {
-      let called = false;
-      const res = await gate({
-        request: new Request("https://emotionrides.com" + path),
-        env,
-        next: async () => {
-          called = true;
-          return new Response("ok");
-        },
-      });
-      assert.equal(called, true, path);
-      assert.equal(await res.text(), "ok");
+describe("open site", () => {
+  test("middleware lets every request through, with or without a password", async () => {
+    const paths = ["/", "/api/reviews", "/api/review-moderate?token=abc", "/api/subscribe"];
+    for (const env of [{}, { SITE_PASSWORD: "secret-pass" }]) {
+      for (const path of paths) {
+        let called = false;
+        const res = await gate({
+          request: new Request("https://emotionrides.com" + path),
+          env,
+          next: async () => {
+            called = true;
+            return new Response("ok", { status: 200 });
+          },
+        });
+        assert.equal(called, true, path);
+        assert.equal(res.status, 200);
+        assert.equal(await res.text(), "ok");
+      }
     }
-    const home = await gate({
-      request: new Request("https://emotionrides.com/"),
-      env,
-      next: async () => new Response("page"),
-    });
-    assert.equal(home.status, 401);
-    assert.equal(await home.text().then((t) => t.includes("page")), false);
   });
 });

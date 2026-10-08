@@ -1,47 +1,31 @@
 # Emotion Rides reviews
 
-Visitors submit a review on the homepage. It stays **pending** until you approve it from your phone. Nothing is seeded. If the KV binding is missing, the Reviews section stays hidden and the rest of the page is unchanged.
+Visitors submit a clothing review on the homepage. It stays **pending** until you approve it from your phone. Nothing is seeded. If the KV binding is missing, the Reviews section stays hidden and the rest of the page is unchanged.
 
-## Cloudflare setup (Pages project `emotionrides`)
+The form asks two clothing questions, and both show on approved cards:
 
-Do this in the dashboard for **Production** and **Preview**, then redeploy. Bindings and secrets are not in this repo.
+- **Is it comfortable?** — Super comfy / Comfy / Okay / Not really
+- **What do you like about it?** — the main text (4–600 characters)
 
-### 1. KV namespace
+Stars, a first name or nickname, an optional product (Hoodie, Tee, Jeans, Jorts), and an optional email (never shown publicly) stay on the form.
 
-1. Cloudflare dashboard → **Storage & databases** → **KV** → **Create namespace**.
-2. Namespace name: `emotionrides-reviews`.
-3. **Workers & Pages** → **emotionrides** → **Settings** → **Bindings** → **Add** → **KV namespace**.
-4. Variable name (exact): `REVIEWS`
-5. KV namespace: `emotionrides-reviews`
-6. Save, and repeat for the Preview environment if it has its own bindings.
+## Cloudflare (Pages project `emotionrides`)
 
-### 2. Signing secret
+Already set on **Production** and **Preview**. Bindings and secrets are not in this repo.
 
-**Settings** → **Variables and Secrets** → **Add** → type **Secret**.
+- KV namespace `emotionrides-reviews`, bound as `REVIEWS`
+- Secret `REVIEW_SIGNING_SECRET` (signs the Approve / Delete links)
+- Existing `RESEND_API_KEY`
+- Optional `RESEND_FROM` — default `Emotion Rides <drops@updates.emotionrides.com>`
+- Optional `RESEND_OWNER` — default `sbackemoto@gmail.com` (review notifications go here)
 
-- Name (exact): `REVIEW_SIGNING_SECRET`
-- Value: a long random string, for example the output of `openssl rand -base64 32`
+`GET /api/reviews` returns `{ "configured": false }` until `REVIEWS`, `REVIEW_SIGNING_SECRET`, and `RESEND_API_KEY` are all set, and the homepage section stays hidden.
 
-Add it for Production and Preview. This signs the Approve / Delete links. Do not commit it.
-
-### 3. Email (already used by the drop list)
-
-Required (existing):
-
-- `RESEND_API_KEY`
-
-Optional (existing):
-
-- `RESEND_FROM` — default `Emotion Rides <drops@updates.emotionrides.com>`
-- `RESEND_OWNER` — default `sbackemoto@gmail.com` (owner notifications go here)
-
-### 4. Redeploy
-
-Bindings apply on the next successful Pages deploy. `GET /api/reviews` returns `{ "configured": false }` until `REVIEWS`, `REVIEW_SIGNING_SECRET`, and `RESEND_API_KEY` are all set, and the homepage section stays hidden.
+The site is publicly open. `functions/_middleware.js` calls `context.next()` for every request.
 
 ## What you do when a review comes in
 
-1. Email arrives at sbackemoto@gmail.com from the existing Resend setup.
+1. Email arrives at sbackemoto@gmail.com from the existing Resend setup. It includes both clothing answers.
 2. Tap **Approve** or **Delete**. The link opens a confirm page (mail apps prefetch GET links, so the first tap does not publish anything).
 3. Tap the button. Approved reviews show on the homepage. Deleted ones do not.
 4. The optional email is in that message only. It is never rendered on the site.

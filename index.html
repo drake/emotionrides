@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Emotion Rides | E-moto streetwear</title>
   <meta name="description" content="Limited e-moto streetwear for Surron, Talaria, and Stark riders. Ride electric. Wear authentic.">
   <meta name="theme-color" content="#0a0a0a">
@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=reviews1">
+  <link rel="stylesheet" href="styles.css?v=reviews2">
 </head>
 <body>
   <div class="emotion-bg" aria-hidden="true"></div>
@@ -36,7 +36,7 @@
         <span></span><span></span><span></span>
       </button>
 
-      <ul id="nav-menu" class="nav-links">
+      <ul class="nav-links nav-links-desktop">
         <li><a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a></li>
         <li><a href="https://www.youtube.com/@SBackEMoto/shorts" rel="noopener noreferrer" target="_blank">Shorts</a></li>
         <li><a href="#movement">Movement</a></li>
@@ -46,6 +46,15 @@
       </ul>
     </nav>
   </header>
+
+  <ul id="nav-menu" class="nav-links nav-links-mobile" hidden>
+    <li><a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a></li>
+    <li><a href="https://www.youtube.com/@SBackEMoto/shorts" rel="noopener noreferrer" target="_blank">Shorts</a></li>
+    <li><a href="#movement">Movement</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="size-chart.html">Size</a></li>
+    <li><a class="nav-cta" href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop the drop</a></li>
+  </ul>
 
   <main id="main">
     <section class="hero" id="top" aria-label="Emotion Rides">
@@ -97,7 +106,7 @@
             <p class="section-index">01 — Next shipment</p>
             <h2>The Drop</h2>
           </div>
-          <p class="section-aside">Limited drop. Shop stays closed until photos and sizes are real. Last shipped: $30 hoodies, July 2026.</p>
+          <p class="section-aside">Limited drop. Live now. Last shipped: $30 hoodies, July 2026.</p>
         </header>
 
         
@@ -109,7 +118,7 @@
             <div class="tile-body">
               <h3>Oversized Fleece Hoodie</h3>
               <p>Heavier fleece. Emotion chest + back.</p>
-              <p class="tile-price">This drop · $40</p>
+              <p class="tile-price">This drop · $35</p>
             </div>
           </a>
 
@@ -119,7 +128,7 @@
             <div class="tile-body">
               <h3>Oversized Cotton Tee</h3>
               <p>Black. Emotion + cross chest.</p>
-              <p class="tile-price">This drop · $30</p>
+              <p class="tile-price">This drop · $25</p>
             </div>
           </a>
 
@@ -130,7 +139,7 @@
             <div class="tile-body">
               <h3>Vintage Wash Denim</h3>
               <p>Sun-fade wide-leg jeans.</p>
-              <p class="tile-price">This drop · $70</p>
+              <p class="tile-price">This drop · $65</p>
             </div>
           </a>
           <a class="tile" href="https://shop.emotionrides.com/" rel="noopener noreferrer">
@@ -139,7 +148,7 @@
             <div class="tile-body">
               <h3>Vintage Wide-Leg Shorts</h3>
               <p>Denim shorts. Same wash.</p>
-              <p class="tile-price">This drop · $60</p>
+              <p class="tile-price">This drop · $50</p>
             </div>
           </a>
 
@@ -147,7 +156,7 @@
 
         <div class="shop-bar">
           <div>
-            <p>Shop is closed. No fake photos. When the boxes land, we shoot them and open.</p>
+            <p>Drop is live. Real photos. Grab yours before it’s gone.</p>
             <ul class="trust-row">
               <li><a href="shipping.html">Shipping</a></li>
               <li><a href="returns.html">14-day returns</a></li>
@@ -311,11 +320,19 @@
               </div>
             </div>
 
+            <fieldset class="comfort-picks">
+              <legend>Is it comfortable?</legend>
+              <label><input type="radio" name="comfort" value="Super comfy" required> Super comfy</label>
+              <label><input type="radio" name="comfort" value="Comfy"> Comfy</label>
+              <label><input type="radio" name="comfort" value="Okay"> Okay</label>
+              <label><input type="radio" name="comfort" value="Not really"> Not really</label>
+            </fieldset>
+
             <div class="review-text-meta">
-              <label for="review-text">Review</label>
+              <label for="review-text">What do you like about it?</label>
               <span id="review-text-count">0 / 600</span>
             </div>
-            <textarea id="review-text" name="text" maxlength="600" required rows="4" placeholder="How does it ride?"></textarea>
+            <textarea id="review-text" name="text" maxlength="600" required rows="4" placeholder="The fleece, the fit, the wash…"></textarea>
 
             <div>
               <label for="review-email">Email <span>optional, never shown</span></label>
@@ -372,7 +389,7 @@
         <a href="#movement">Movement</a>
         <a href="#reviews">Reviews</a>
         <a href="size-chart.html">Size chart</a>
-        <a href="mailto:sbackemoto@gmail.com">Contact</a>
+        <a href="mailto:emotioncosupport@gmail.com">Contact</a>
       </div>
       <div>
         <h2>Watch</h2>
@@ -390,7 +407,7 @@
     </div>
     <div class="footer-base">
       <p>© 2026 Emotion Rides. All rights reserved.</p>
-      <p>sbackemoto@gmail.com</p>
+      <p>emotioncosupport@gmail.com</p>
     </div>
   </footer>
 
@@ -404,6 +421,8 @@
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
         toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
         menu.classList.toggle("is-open", open);
+        if (open) menu.removeAttribute("hidden");
+        else menu.setAttribute("hidden", "");
         document.body.classList.toggle("nav-open", open);
       }
 
@@ -520,6 +539,13 @@
         return row;
       }
 
+      function question(label) {
+        var p = document.createElement("p");
+        p.className = "review-q";
+        p.textContent = label;
+        return p;
+      }
+
       function render(data) {
         var reviews = (data && data.reviews) || [];
         var count = data && typeof data.count === "number" ? data.count : reviews.length;
@@ -562,6 +588,9 @@
           }
           top.appendChild(starRow(Number(review.rating) || 0));
           top.appendChild(who);
+          var comfort = document.createElement("p");
+          comfort.className = "review-comfort";
+          comfort.textContent = review.comfort || "";
           var body = document.createElement("p");
           body.className = "review-text";
           body.textContent = review.text || "";
@@ -569,6 +598,9 @@
           date.className = "review-date";
           date.textContent = review.dateLabel || "";
           item.appendChild(top);
+          item.appendChild(question("Is it comfortable?"));
+          item.appendChild(comfort);
+          item.appendChild(question("What do you like about it?"));
           item.appendChild(body);
           item.appendChild(date);
           list.appendChild(item);
@@ -612,6 +644,16 @@
         starBox.addEventListener("mouseleave", function () { paintStars(); });
       }
 
+      function paintComfort() {
+        form.querySelectorAll(".comfort-picks label").forEach(function (label) {
+          var input = label.querySelector("input");
+          label.classList.toggle("is-on", !!(input && input.checked));
+        });
+      }
+      form.querySelectorAll(".comfort-picks input").forEach(function (input) {
+        input.addEventListener("change", paintComfort);
+      });
+
       function setStatus(msg, kind) {
         status.textContent = msg;
         status.classList.remove("is-ok", "is-err");
@@ -628,6 +670,8 @@
         e.preventDefault();
         var picked = form.querySelector("input[name=rating]:checked");
         var rating = picked ? Number(picked.value) : 0;
+        var comfortInput = form.querySelector("input[name=comfort]:checked");
+        var comfort = comfortInput ? comfortInput.value : "";
         var name = (document.getElementById("review-name").value || "").trim();
         var product = document.getElementById("review-product").value || "";
         var body = (text && text.value || "").trim();
@@ -642,8 +686,12 @@
           document.getElementById("review-name").focus();
           return;
         }
+        if (!comfort) {
+          setStatus("Say if it’s comfortable.", "is-err");
+          return;
+        }
         if (body.length < 4) {
-          setStatus("Write a few words.", "is-err");
+          setStatus("Say what you like about it.", "is-err");
           if (text) text.focus();
           return;
         }
@@ -663,6 +711,7 @@
               rating: rating,
               name: name,
               product: product,
+              comfort: comfort,
               text: body,
               email: email,
               fax_number: honey
@@ -673,6 +722,7 @@
           if (!res.ok) throw new Error((data && data.error) || "Couldn’t send that. Try again.");
           form.reset();
           paintStars(0);
+          paintComfort();
           if (counter) counter.textContent = "0 / 600";
           setStatus("Got it. It’ll show here after it’s approved.", "is-ok");
         } catch (err) {

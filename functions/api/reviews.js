@@ -188,6 +188,7 @@ export async function onRequestPost(context) {
     name: parsed.value.name,
     rating: parsed.value.rating,
     product: parsed.value.product,
+    comfort: parsed.value.comfort,
     text: parsed.value.text,
     email: parsed.value.email,
     status: "pending",
