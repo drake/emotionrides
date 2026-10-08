@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Emotion Rides | E-moto streetwear</title>
   <meta name="description" content="Limited e-moto streetwear for Surron, Talaria, and Stark riders. Ride electric. Wear authentic.">
   <meta name="theme-color" content="#0a0a0a">
@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=jeansok1">
+  <link rel="stylesheet" href="styles.css?v=reviews2">
 </head>
 <body>
   <div class="emotion-bg" aria-hidden="true"></div>
@@ -36,15 +36,25 @@
         <span></span><span></span><span></span>
       </button>
 
-      <ul id="nav-menu" class="nav-links">
+      <ul class="nav-links nav-links-desktop">
         <li><a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a></li>
         <li><a href="https://www.youtube.com/@SBackEMoto/shorts" rel="noopener noreferrer" target="_blank">Shorts</a></li>
         <li><a href="#movement">Movement</a></li>
+        <li><a href="#reviews">Reviews</a></li>
         <li><a href="size-chart.html">Size</a></li>
         <li><a class="nav-cta" href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop the drop</a></li>
       </ul>
     </nav>
   </header>
+
+  <ul id="nav-menu" class="nav-links nav-links-mobile" hidden>
+    <li><a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a></li>
+    <li><a href="https://www.youtube.com/@SBackEMoto/shorts" rel="noopener noreferrer" target="_blank">Shorts</a></li>
+    <li><a href="#movement">Movement</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="size-chart.html">Size</a></li>
+    <li><a class="nav-cta" href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop the drop</a></li>
+  </ul>
 
   <main id="main">
     <section class="hero" id="top" aria-label="Emotion Rides">
@@ -96,7 +106,7 @@
             <p class="section-index">01 — Next shipment</p>
             <h2>The Drop</h2>
           </div>
-          <p class="section-aside">Limited drop. Shop stays closed until photos and sizes are real. Last shipped: $30 hoodies, July 2026.</p>
+          <p class="section-aside">Limited drop. Live now. Last shipped: $30 hoodies, July 2026.</p>
         </header>
 
         
@@ -108,7 +118,7 @@
             <div class="tile-body">
               <h3>Oversized Fleece Hoodie</h3>
               <p>Heavier fleece. Emotion chest + back.</p>
-              <p class="tile-price">This drop · $40</p>
+              <p class="tile-price">This drop · $35</p>
             </div>
           </a>
 
@@ -118,7 +128,7 @@
             <div class="tile-body">
               <h3>Oversized Cotton Tee</h3>
               <p>Black. Emotion + cross chest.</p>
-              <p class="tile-price">This drop · $30</p>
+              <p class="tile-price">This drop · $25</p>
             </div>
           </a>
 
@@ -129,7 +139,7 @@
             <div class="tile-body">
               <h3>Vintage Wash Denim</h3>
               <p>Sun-fade wide-leg jeans.</p>
-              <p class="tile-price">This drop · $70</p>
+              <p class="tile-price">This drop · $65</p>
             </div>
           </a>
           <a class="tile" href="https://shop.emotionrides.com/" rel="noopener noreferrer">
@@ -138,7 +148,7 @@
             <div class="tile-body">
               <h3>Vintage Wide-Leg Shorts</h3>
               <p>Denim shorts. Same wash.</p>
-              <p class="tile-price">This drop · $60</p>
+              <p class="tile-price">This drop · $50</p>
             </div>
           </a>
 
@@ -146,7 +156,7 @@
 
         <div class="shop-bar">
           <div>
-            <p>Shop is closed. No fake photos. When the boxes land, we shoot them and open.</p>
+            <p>Drop is live. Real photos. Grab yours before it’s gone.</p>
             <ul class="trust-row">
               <li><a href="shipping.html">Shipping</a></li>
               <li><a href="returns.html">14-day returns</a></li>
@@ -257,6 +267,86 @@
         </div>
       </div>
     </section>
+
+    <section class="section" id="reviews" hidden>
+      <div class="wrap">
+        <header class="section-head">
+          <div>
+            <p class="section-index">04 — Reviews</p>
+            <h2>Reviews</h2>
+          </div>
+          <p class="section-aside">From people who wore it. Nothing goes public until it’s approved.</p>
+        </header>
+
+        <div class="reviews-layout">
+          <div class="reviews-feed">
+            <div class="reviews-summary" id="reviews-summary" hidden>
+              <div class="reviews-avg" id="reviews-avg"></div>
+              <p class="reviews-count" id="reviews-count"></p>
+            </div>
+            <p class="reviews-empty" id="reviews-empty">Be the first to review.</p>
+            <ul class="reviews-list" id="reviews-list"></ul>
+          </div>
+
+          <form class="review-form" id="review-form" action="/api/reviews" method="post" novalidate>
+            <fieldset class="review-stars">
+              <legend>Rating</legend>
+              <input type="radio" name="rating" id="review-star-1" value="1" required>
+              <label for="review-star-1"><span class="sr-only">1 star</span></label>
+              <input type="radio" name="rating" id="review-star-2" value="2">
+              <label for="review-star-2"><span class="sr-only">2 stars</span></label>
+              <input type="radio" name="rating" id="review-star-3" value="3">
+              <label for="review-star-3"><span class="sr-only">3 stars</span></label>
+              <input type="radio" name="rating" id="review-star-4" value="4">
+              <label for="review-star-4"><span class="sr-only">4 stars</span></label>
+              <input type="radio" name="rating" id="review-star-5" value="5">
+              <label for="review-star-5"><span class="sr-only">5 stars</span></label>
+            </fieldset>
+
+            <div class="review-fields">
+              <div>
+                <label for="review-name">Name</label>
+                <input id="review-name" name="name" type="text" maxlength="40" autocomplete="nickname" required placeholder="First name or nickname">
+              </div>
+              <div>
+                <label for="review-product">Product <span>optional</span></label>
+                <select id="review-product" name="product">
+                  <option value="">Not specific</option>
+                  <option>Hoodie</option>
+                  <option>Tee</option>
+                  <option>Jeans</option>
+                  <option>Jorts</option>
+                </select>
+              </div>
+            </div>
+
+            <fieldset class="comfort-picks">
+              <legend>Is it comfortable?</legend>
+              <label><input type="radio" name="comfort" value="Super comfy" required> Super comfy</label>
+              <label><input type="radio" name="comfort" value="Comfy"> Comfy</label>
+              <label><input type="radio" name="comfort" value="Okay"> Okay</label>
+              <label><input type="radio" name="comfort" value="Not really"> Not really</label>
+            </fieldset>
+
+            <div class="review-text-meta">
+              <label for="review-text">What do you like about it?</label>
+              <span id="review-text-count">0 / 600</span>
+            </div>
+            <textarea id="review-text" name="text" maxlength="600" required rows="4" placeholder="Soft, fits great, love the logo…"></textarea>
+
+            <div>
+              <label for="review-email">Email <span>optional, never shown</span></label>
+              <input id="review-email" name="email" type="email" maxlength="200" autocomplete="email" inputmode="email" placeholder="you@email.com">
+            </div>
+
+            <input type="text" name="fax_number" id="review-fax" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <button class="btn btn-primary" type="submit" id="review-submit">Send review</button>
+            <p class="review-form-note" id="review-form-status" role="status" aria-live="polite">Shows after it’s approved. Email stays off the page.</p>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
   <section class="drop-capture" id="drop-list">
@@ -297,8 +387,9 @@
         <a href="https://shop.emotionrides.com/" rel="noopener noreferrer">Shop</a>
         <a href="https://www.youtube.com/@SBackEMoto/shorts" rel="noopener noreferrer" target="_blank">Shorts</a>
         <a href="#movement">Movement</a>
+        <a href="#reviews">Reviews</a>
         <a href="size-chart.html">Size chart</a>
-        <a href="mailto:sbackemoto@gmail.com">Contact</a>
+        <a href="mailto:emotioncosupport@gmail.com">Contact</a>
       </div>
       <div>
         <h2>Watch</h2>
@@ -316,7 +407,7 @@
     </div>
     <div class="footer-base">
       <p>© 2026 Emotion Rides. All rights reserved.</p>
-      <p>sbackemoto@gmail.com</p>
+      <p>emotioncosupport@gmail.com</p>
     </div>
   </footer>
 
@@ -330,6 +421,8 @@
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
         toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
         menu.classList.toggle("is-open", open);
+        if (open) menu.removeAttribute("hidden");
+        else menu.setAttribute("hidden", "");
         document.body.classList.toggle("nav-open", open);
       }
 
@@ -416,6 +509,227 @@
         .then(function (r) { return r.json(); })
         .then(function (d) { if (d && typeof d.count === "number") show(d.count); })
         .catch(function () {});
+    })();
+
+    (function () {
+      var section = document.getElementById("reviews");
+      var summary = document.getElementById("reviews-summary");
+      var avg = document.getElementById("reviews-avg");
+      var countEl = document.getElementById("reviews-count");
+      var empty = document.getElementById("reviews-empty");
+      var list = document.getElementById("reviews-list");
+      var form = document.getElementById("review-form");
+      var status = document.getElementById("review-form-status");
+      var btn = document.getElementById("review-submit");
+      var text = document.getElementById("review-text");
+      var counter = document.getElementById("review-text-count");
+      if (!section || !form || !status || !btn || !list) return;
+
+      function starRow(rating) {
+        var row = document.createElement("p");
+        row.className = "review-stars-out";
+        row.setAttribute("aria-label", rating + " out of 5 stars");
+        for (var i = 1; i <= 5; i++) {
+          var star = document.createElement("span");
+          star.textContent = "★";
+          star.className = i <= rating ? "is-on" : "is-off";
+          star.setAttribute("aria-hidden", "true");
+          row.appendChild(star);
+        }
+        return row;
+      }
+
+      function question(label) {
+        var p = document.createElement("p");
+        p.className = "review-q";
+        p.textContent = label;
+        return p;
+      }
+
+      function render(data) {
+        var reviews = (data && data.reviews) || [];
+        var count = data && typeof data.count === "number" ? data.count : reviews.length;
+        list.replaceChildren();
+        if (!count) {
+          if (empty) empty.hidden = false;
+          if (summary) summary.hidden = true;
+          return;
+        }
+        if (empty) empty.hidden = true;
+        if (summary) summary.hidden = false;
+        if (avg) {
+          avg.replaceChildren();
+          if (typeof data.average === "number") {
+            var num = document.createElement("span");
+            num.className = "reviews-avg-num";
+            num.textContent = data.average.toFixed(1);
+            avg.appendChild(starRow(Math.round(data.average)));
+            avg.appendChild(num);
+          }
+        }
+        if (countEl) countEl.textContent = count === 1 ? "1 review" : count + " reviews";
+        reviews.forEach(function (review) {
+          if (!review) return;
+          var item = document.createElement("li");
+          item.className = "review-card";
+          var top = document.createElement("div");
+          top.className = "review-card-top";
+          var who = document.createElement("p");
+          who.className = "review-who";
+          var name = document.createElement("span");
+          name.className = "review-name";
+          name.textContent = review.name || "";
+          who.appendChild(name);
+          if (review.product) {
+            var product = document.createElement("span");
+            product.className = "review-product";
+            product.textContent = review.product;
+            who.appendChild(product);
+          }
+          top.appendChild(starRow(Number(review.rating) || 0));
+          top.appendChild(who);
+          var comfort = document.createElement("p");
+          comfort.className = "review-comfort";
+          comfort.textContent = review.comfort || "";
+          var body = document.createElement("p");
+          body.className = "review-text";
+          body.textContent = review.text || "";
+          var date = document.createElement("p");
+          date.className = "review-date";
+          date.textContent = review.dateLabel || "";
+          item.appendChild(top);
+          item.appendChild(question("Is it comfortable?"));
+          item.appendChild(comfort);
+          item.appendChild(question("What do you like about it?"));
+          item.appendChild(body);
+          item.appendChild(date);
+          list.appendChild(item);
+        });
+      }
+
+      fetch("/api/reviews", { headers: { Accept: "application/json" } })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data || data.configured !== true) return;
+          render(data);
+          section.hidden = false;
+        })
+        .catch(function () {});
+
+      if (text && counter) {
+        text.addEventListener("input", function () {
+          counter.textContent = text.value.length + " / 600";
+        });
+      }
+
+      function paintStars(value) {
+        var chosen = form.querySelector("input[name=rating]:checked");
+        var current = typeof value === "number" ? value : (chosen ? Number(chosen.value) : 0);
+        form.querySelectorAll(".review-stars label").forEach(function (label) {
+          var input = document.getElementById(label.getAttribute("for"));
+          label.classList.toggle("is-on", !!(input && Number(input.value) <= current));
+        });
+      }
+      form.querySelectorAll(".review-stars input").forEach(function (input) {
+        input.addEventListener("change", function () { paintStars(); });
+      });
+      var starBox = form.querySelector(".review-stars");
+      if (starBox && window.matchMedia("(hover: hover)").matches) {
+        starBox.querySelectorAll("label").forEach(function (label) {
+          label.addEventListener("mouseenter", function () {
+            var input = document.getElementById(label.getAttribute("for"));
+            paintStars(input ? Number(input.value) : 0);
+          });
+        });
+        starBox.addEventListener("mouseleave", function () { paintStars(); });
+      }
+
+      function paintComfort() {
+        form.querySelectorAll(".comfort-picks label").forEach(function (label) {
+          var input = label.querySelector("input");
+          label.classList.toggle("is-on", !!(input && input.checked));
+        });
+      }
+      form.querySelectorAll(".comfort-picks input").forEach(function (input) {
+        input.addEventListener("change", paintComfort);
+      });
+
+      function setStatus(msg, kind) {
+        status.textContent = msg;
+        status.classList.remove("is-ok", "is-err");
+        if (kind) status.classList.add(kind);
+      }
+
+      form.addEventListener("input", function () {
+        if (status.classList.contains("is-ok")) {
+          setStatus("Shows after it’s approved. Email stays off the page.", null);
+        }
+      });
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var picked = form.querySelector("input[name=rating]:checked");
+        var rating = picked ? Number(picked.value) : 0;
+        var comfortInput = form.querySelector("input[name=comfort]:checked");
+        var comfort = comfortInput ? comfortInput.value : "";
+        var name = (document.getElementById("review-name").value || "").trim();
+        var product = document.getElementById("review-product").value || "";
+        var body = (text && text.value || "").trim();
+        var email = (document.getElementById("review-email").value || "").trim();
+        var honey = (document.getElementById("review-fax") || {}).value || "";
+        if (rating < 1) {
+          setStatus("Pick a star rating.", "is-err");
+          return;
+        }
+        if (!name) {
+          setStatus("Add a first name or nickname.", "is-err");
+          document.getElementById("review-name").focus();
+          return;
+        }
+        if (!comfort) {
+          setStatus("Say if it’s comfortable.", "is-err");
+          return;
+        }
+        if (body.length < 4) {
+          setStatus("Say what you like about it.", "is-err");
+          if (text) text.focus();
+          return;
+        }
+        if (email && (email.indexOf("@") < 1 || email.indexOf(".") < 0)) {
+          setStatus("That email doesn’t look right.", "is-err");
+          document.getElementById("review-email").focus();
+          return;
+        }
+
+        btn.disabled = true;
+        setStatus("Sending…", null);
+        try {
+          var res = await fetch("/api/reviews", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              rating: rating,
+              name: name,
+              product: product,
+              comfort: comfort,
+              text: body,
+              email: email,
+              fax_number: honey
+            })
+          });
+          var data = {};
+          try { data = await res.json(); } catch (_) {}
+          if (!res.ok) throw new Error((data && data.error) || "Couldn’t send that. Try again.");
+          form.reset();
+          paintStars(0);
+          paintComfort();
+          if (counter) counter.textContent = "0 / 600";
+          setStatus("Got it. It’ll show here after it’s approved.", "is-ok");
+        } catch (err) {
+          setStatus(err.message || "Couldn’t send that. Try again.", "is-err");
+        }
+        btn.disabled = false;
+      });
     })();
   </script>
 </body>
