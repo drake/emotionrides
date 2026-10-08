@@ -2,6 +2,8 @@
  * Emotion Rides site password gate.
  * Set Pages secret: SITE_PASSWORD
  * Exempts /api/list-count so the closed Big Cartel page can still show drop-list count.
+ * Exempts /api/reviews and /api/review-moderate so visitors can read and submit
+ * reviews, and so emailed approve/delete links work without the site cookie.
  */
 
 const COOKIE = "er_gate";
@@ -92,10 +94,14 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // Public: unlock endpoint + live subscriber count for closed Big Cartel page
+  // Public: unlock endpoint, live subscriber count, and reviews.
+  // Password check below is unchanged. Review routes are exempt because
+  // approve/delete links in email have no er_gate cookie.
   if (
     path === "/api/list-count" || path.startsWith("/api/list-count/") ||
-    path === "/api/gate" || path.startsWith("/api/gate/")
+    path === "/api/gate" || path.startsWith("/api/gate/") ||
+    path === "/api/reviews" || path.startsWith("/api/reviews/") ||
+    path === "/api/review-moderate" || path.startsWith("/api/review-moderate/")
   ) {
     return next();
   }
