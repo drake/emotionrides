@@ -1337,7 +1337,7 @@ table.size-table {
   color: #5ef0ff;
   text-shadow: 0 0 10px rgba(94, 240, 255, 0.45);
 }
-.review-stars-out .is-off { color: #3a3a3a; }
+.review-stars-out .is-off { color: #6a6a6a; }
 .review-who {
   display: flex;
   flex-wrap: wrap;
@@ -1475,7 +1475,7 @@ table.size-table {
   display: grid;
   place-items: center;
   cursor: pointer;
-  color: #3a3a3a;
+  color: #6a6a6a;
   font-size: 1.65rem;
   letter-spacing: 0;
   line-height: 1;
